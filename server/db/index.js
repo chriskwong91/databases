@@ -14,14 +14,16 @@ exports.connect = function() {
 };
 
 exports.getQuery = function(queryString, queryArgs, callback) {
-  console.log('in getQuery');
   dbConnection.query(queryString, queryArgs, function(error, results) {
-    console.log(error);
-    console.log(results);
-    callback(results);
+    callback(error, results);
   });
 };
 
 exports.disconnect = function() {
   dbConnection.end();
+};
+
+exports.insert = function() {
+
+
 };
