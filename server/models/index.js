@@ -30,8 +30,6 @@ module.exports = {
         ORDER BY m.id DESC
         ;`;
 
-        //SELECT MAX(price), item description
-
       db.getQuery(queryText, [], function(error, results) {
         var messages = results.slice(0, 100);
         var response = JSON.stringify({
@@ -44,30 +42,20 @@ module.exports = {
         console.log(results);
       });
 
-      /*
-        {results: [{
-          username: 'asdfa',
-          roomname: 'asdfasdf',
-          text: 'hey'
-        }, {
-          username: 'asdfa',
-          roomname: 'asdfasdf',
-          text: 'hey'
-        }, {
-          username: 'asdfa',
-          roomname: 'asdfasdf',
-          text: 'hey'
-        }]}
-      */
-
-      //do the sql queries, come in objects
-      //start with messages
-      //for each message,
-
-
     }, // a function which produces all the messages
-    post: function () {
-
+    post: function (message, callback) {
+      var insertToUsers = `
+        INSERT INTO users (name)
+        VALUES (${message.username})
+      `;
+      var insertToRooms = `
+        INSERT INTO rooms (name)
+        VALUES (${message.roomname})
+      `;
+      var insertToMessages = `
+        INSERT INTO messages (text)
+        VALUES (${message.text})
+      `;
 
     } // a function which can be used to insert a message into the database
   },

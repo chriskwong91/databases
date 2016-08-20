@@ -19,7 +19,17 @@ module.exports = {
 
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      console.log('coming in here?');
+      var message = '';
+      res.setEncoding('utf8');
+      res.on('data', function(chunks) {
+        message += chunks;
+      });
+      res.on('end', function(error) {
+        models.post(message, function() {
+          
+        });
+      });
+
 
     }, // a function which handles posting a message to the database
     options: function(req, res) {
