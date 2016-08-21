@@ -31,16 +31,16 @@ describe('Persistent Node Chat Server', function() {
     // Post the user to the chat server.
     request({
       method: 'POST',
-      uri: 'http://127.0.0.1:3000/classes/users',
+      uri: 'http://localhost:3000/classes/users',
       json: { username: 'Valjean' }
     }, function () {
       // Post a message to the node chat server:
       request({
         method: 'POST',
-        uri: 'http://127.0.0.1:3000/classes/messages',
+        uri: 'http://localhost:3000/classes/messages',
         json: {
           username: 'Valjean',
-          message: 'In mercy\'s name, three days is all I need.',
+          text: 'In mercy\'s name, three days is all I need.',
           roomname: 'Hello'
         }
       }, function () {
@@ -53,6 +53,7 @@ describe('Persistent Node Chat Server', function() {
         var queryArgs = [];
 
         dbConnection.query(queryString, queryArgs, function(err, results) {
+          console.log(err, 'TEST FEEDBACK: ', results);
           // Should have one result:
           expect(results.length).to.equal(1);
 

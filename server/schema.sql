@@ -8,14 +8,16 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE (name)
 );
 
 DROP TABLE IF EXISTS rooms;
 CREATE TABLE rooms (
   id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(255) NOT NULL,
-  PRIMARY KEY(id)
+  name VARCHAR(255),
+  PRIMARY KEY(id),
+  UNIQUE (name)
 );
 
 DROP TABLE IF EXISTS messages;
@@ -24,7 +26,7 @@ CREATE TABLE messages (
   id INT NOT NULL AUTO_INCREMENT,
   user_id INT NOT NULL,
   room_id INT NOT NULL,
-  text VARCHAR(255),
+  message VARCHAR(255),
   PRIMARY KEY(id),
   FOREIGN KEY(user_id) REFERENCES users(id),
   FOREIGN KEY(room_id) REFERENCES rooms(id)

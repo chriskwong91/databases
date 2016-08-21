@@ -26,7 +26,7 @@ var app = {
     app.$roomSelect.on('change', app.saveRoom);
 
     // Fetch previous messages
-    app.startSpinner();
+    // app.startSpinner();
     app.fetch(false);
 
     // Poll for new messages
@@ -34,7 +34,7 @@ var app = {
   },
 
   send: function(data) {
-    app.startSpinner();
+    //app.startSpinner();
     // Clear messages input
     app.$message.val('');
 
@@ -82,7 +82,7 @@ var app = {
         }
       },
       error: function(data) {
-        console.error('chatterbox: Failed to fetch messages');
+        console.error(data, 'chatterbox: Failed to fetch messages');
       }
     });
   },
@@ -203,7 +203,7 @@ var app = {
         app.fetch();
       }
     } else {
-      app.startSpinner();
+      //app.startSpinner();
       // Store as undefined for empty names
       app.roomname = app.$roomSelect.val();
 
@@ -225,10 +225,10 @@ var app = {
     evt.preventDefault();
   },
 
-  startSpinner: function() {
-    $('.spinner img').show();
-    $('form input[type=submit]').attr('disabled', 'true');
-  },
+  // startSpinner: function() {
+  //   $('.spinner img').show();
+  //   $('form input[type=submit]').attr('disabled', 'true');
+  // },
 
   stopSpinner: function() {
     $('.spinner img').fadeOut('fast');

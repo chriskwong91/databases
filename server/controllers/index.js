@@ -1,4 +1,6 @@
+var app = require('express')();
 var models = require('../models');
+var parser = require('body-parser');
 
 var headers = {
   'access-control-allow-origin': '*',
@@ -13,23 +15,20 @@ module.exports = {
   messages: {
     get: function (req, res) {
       models.messages.get(function(response) {
-        res.writeHead(200, headers);
-        res.end(response);
+        res.send(JSON.parse(response));
+        // res.writeHead(200, headers);
+        // res.end(response);
       });
 
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      var message = '';
-      res.setEncoding('utf8');
-      res.on('data', function(chunks) {
-        message += chunks;
+      app.use(parser.json());
+      models.messages.post(req.body, function() {
+        // console.log(req.body);
+        res.send('anythign');
+        // res.writeHead(201, headers);
+        // res.end('response text');
       });
-      res.on('end', function(error) {
-        models.post(message, function() {
-          
-        });
-      });
-
 
     }, // a function which handles posting a message to the database
     options: function(req, res) {
@@ -47,7 +46,12 @@ module.exports = {
 
     },
     post: function (req, res) {
-      console.log('coming in here?');
+      app.use(parser.json());
+      models.users.post(req.body, function() {
+        console.log(req.body);
+        res.writeHead(201, headers);
+        res.end();
+      });
 
     }
   }
